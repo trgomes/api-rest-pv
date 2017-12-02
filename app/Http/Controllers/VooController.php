@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Voo;
 
 class VooController extends Controller
 {    
+
+    protected $voo;
+
+    function __construct(Voo $voo)
+    {
+        $this->voo = $voo;
+    }
 
     /**
      * Display a listing of the resource.
@@ -17,13 +24,7 @@ class VooController extends Controller
      */
     public function index()
     {
-        //$voos = Voo::all();
-
-        $voos = DB::table('voos')
-            ->join('aeronaves', 'voos.aeronave_id', '=', 'aeronaves.id')
-            ->join('aeroportos', 'voos.origem_id', '=', 'aeroportos.id')            
-            ->select('voos.numero','voos.data','aeronaves.matricula', 'aeronaves.tipo', 'aeroportos.nome as origem')
-            ->get();
+        $voos = $this->voo->getAllVoos();
         return $voos;
     }
 
@@ -56,7 +57,8 @@ class VooController extends Controller
      */
     public function show($id)
     {
-        //
+        $voo = $this->voo->getById($id);
+        return $voo;
     }
 
     /**
@@ -90,6 +92,6 @@ class VooController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
