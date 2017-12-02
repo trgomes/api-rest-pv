@@ -33,6 +33,8 @@ class CreateVoosTable extends Migration
             $table->foreign('destino_id')
             ->references('id')
             ->on('aeroportos');
+            //Timestamps
+            $table->timestamps();
         });
     }
 

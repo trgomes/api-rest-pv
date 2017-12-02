@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Voo;
+use App\Aeronave;
 
-class VooController extends Controller
-{    
+class AeronaveController extends Controller
+{
 
-    protected $voo;
+    protected $aeronave;
 
-    function __construct(Voo $voo)
+
+    function __construct(Aeronave $aeronave)
     {
-        $this->voo = $voo;
+        $this->aeronave = $aeronave;
     }
 
     /**
@@ -24,7 +24,8 @@ class VooController extends Controller
      */
     public function index()
     {
-        return $this->voo->getAllVoos();       
+        return $this->aeronave->getAllAeronaves();
+        
     }
 
     /**
@@ -34,7 +35,7 @@ class VooController extends Controller
      */
     public function create()
     {
-        //
+               
     }
 
     /**
@@ -45,7 +46,7 @@ class VooController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->voo->createVoo($request);        
+        return $this->aeronave->createAeronave($request);
     }
 
     /**
@@ -56,14 +57,7 @@ class VooController extends Controller
      */
     public function show($id)
     {
-        return $this->voo->getById($id);
-        
-    }
-
-
-    public function showByAirport($id)
-    {
-        return $this->voo->getByAirport($id);       
+        return $this->aeronave->getById($id);        
     }
 
     /**
@@ -86,7 +80,7 @@ class VooController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->voo->updateVoo($request, $id);       
+        return $this->aeronave->updateAeronave($request, $id);
     }
 
     /**
@@ -97,6 +91,6 @@ class VooController extends Controller
      */
     public function destroy($id)
     {
-        return $this->voo->deleteVoo($id);        
+        return $this->aeronave->deleteAeronave($id);       
     }
 }

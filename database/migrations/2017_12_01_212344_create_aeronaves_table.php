@@ -17,6 +17,7 @@ class CreateAeronavesTable extends Migration
             $table->increments('id');
             $table->string('matricula');
             $table->string('tipo');
+            $table->timestamps();
         });
     }
 

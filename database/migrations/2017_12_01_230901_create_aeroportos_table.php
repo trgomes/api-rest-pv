@@ -16,6 +16,7 @@ class CreateAeroportosTable extends Migration
         Schema::create('aeroportos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
+            $table->timestamps();
         });
     }
 

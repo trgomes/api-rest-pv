@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Voo;
+use App\Aeroporto;
 
-class VooController extends Controller
-{    
+class AeroportoController extends Controller
+{
 
-    protected $voo;
+    protected $aeroporto;
 
-    function __construct(Voo $voo)
+
+    function __construct(Aeroporto $aeroporto)
     {
-        $this->voo = $voo;
+        $this->aeroporto = $aeroporto;
     }
+
 
     /**
      * Display a listing of the resource.
@@ -24,7 +25,7 @@ class VooController extends Controller
      */
     public function index()
     {
-        return $this->voo->getAllVoos();       
+        return $this->aeroporto->getAllAeroportos();
     }
 
     /**
@@ -45,7 +46,7 @@ class VooController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->voo->createVoo($request);        
+        return $this->aeroporto->createAeroporto($request);
     }
 
     /**
@@ -56,14 +57,7 @@ class VooController extends Controller
      */
     public function show($id)
     {
-        return $this->voo->getById($id);
-        
-    }
-
-
-    public function showByAirport($id)
-    {
-        return $this->voo->getByAirport($id);       
+        return $this->aeroporto->getById($id);
     }
 
     /**
@@ -86,7 +80,7 @@ class VooController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->voo->updateVoo($request, $id);       
+        return $this->aeroporto->updateAeroporto($request, $id);
     }
 
     /**
@@ -97,6 +91,6 @@ class VooController extends Controller
      */
     public function destroy($id)
     {
-        return $this->voo->deleteVoo($id);        
+        return $this->aeroporto->deleteAeroporto($id);
     }
 }
