@@ -17,6 +17,7 @@ class CreateVoosTable extends Migration
             $table->increments('id');
             $table->string('numero', 20);
             $table->date('data'); 
+            $table->time('hora');
             $table->integer('aeronave_id')->unsigned();
             $table->integer('origem_id')->unsigned();
             $table->integer('destino_id')->unsigned();
