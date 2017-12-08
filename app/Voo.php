@@ -69,7 +69,7 @@ class Voo extends Model
             ->join('aeroportos as ad', 'v.destino_id', '=', 'ad.id')          
             ->select('v.id','v.numero','v.data','v.hora','a.matricula', 'a.tipo', 'ao.nome as origem', 'ad.nome as destino')
             ->get();
-        
+
             //Verifica se existe um voo com o ID informado
         if(!$voos)
         {
@@ -88,7 +88,8 @@ class Voo extends Model
             ->join('aeroportos as ao', 'v.origem_id', '=', 'ao.id') 
             ->join('aeroportos as ad', 'v.destino_id', '=', 'ad.id') 
             ->where('v.id', '=', $id)         
-            ->select('v.id','v.numero','v.data','v.hora','a.matricula', 'a.tipo', 'ao.nome as origem', 'ad.nome as destino')            
+//            ->select('v.id','v.numero','v.data','v.hora','a.matricula', 'a.tipo', 'ao.nome as origem', 'ad.nome as destino')
+            ->select('v.*','a.*', 'ao.id as origem_id', 'ao.nome as origem', 'ad.id as destino_id','ad.nome as destino')
             ->get();
 
         //Verifica se existe um voo com o ID informado
