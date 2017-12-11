@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 //    Route::resource('voos', 'VooController');
 //});
 
+
+
 Route::resource('voos', 'VooController');
 Route::resource('aeronaves', 'AeronaveController');
 Route::resource('aeroportos', 'AeroportoController');

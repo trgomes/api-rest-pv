@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\DB;
 class Voo extends Model
 {
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'numero', 'data', 'hora', 'aeronave_id', 'origem_id', 'destino_id'
     ];
@@ -54,7 +49,8 @@ class Voo extends Model
         }
         catch(\Exception $e)
         {
-            return response()->json(['response' => 'Erro ao cadastrar!'],400);
+            return response()->json(['response' => 'Erro ao cadastrar!', 'request' => $request, 'error' => $e->getMessage()], 400);
+
         }        
 
     }
@@ -87,9 +83,8 @@ class Voo extends Model
             ->join('aeronaves as a', 'v.aeronave_id', '=', 'a.id')
             ->join('aeroportos as ao', 'v.origem_id', '=', 'ao.id') 
             ->join('aeroportos as ad', 'v.destino_id', '=', 'ad.id') 
-            ->where('v.id', '=', $id)         
-//            ->select('v.id','v.numero','v.data','v.hora','a.matricula', 'a.tipo', 'ao.nome as origem', 'ad.nome as destino')
-            ->select('v.*','a.*', 'ao.id as origem_id', 'ao.nome as origem', 'ad.id as destino_id','ad.nome as destino')
+            ->where('v.id', '=', $id)
+            ->select('v.*','a.matricula', 'a.tipo', 'ao.id as origem_id', 'ao.nome as origem', 'ad.id as destino_id','ad.nome as destino')
             ->get();
 
         //Verifica se existe um voo com o ID informado

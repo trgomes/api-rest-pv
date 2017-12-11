@@ -17,43 +17,25 @@ class VooController extends Controller
         $this->voo = $voo;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return $this->voo->getAllVoos();       
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //Armazena / Cadastra voo
     public function store(Request $request)
     {
         return $this->voo->createVoo($request);        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //Retorna voo especifico
     public function show($id)
     {
         return $this->voo->getById($id);
@@ -61,40 +43,18 @@ class VooController extends Controller
     }
 
 
-    public function showByAirport($id)
-    {
-        return $this->voo->getByAirport($id);       
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Uopdate voo
     public function update(Request $request, $id)
     {
         return $this->voo->updateVoo($request, $id);       
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Delete voo
     public function destroy($id)
     {
         return $this->voo->deleteVoo($id);        
