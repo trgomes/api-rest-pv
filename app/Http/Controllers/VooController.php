@@ -51,7 +51,7 @@ class VooController extends Controller
     // Uopdate voo
     public function update(Request $request, $id)
     {
-        return $this->voo->updateVoo($request, $id);       
+        return $this->voo->updateVoo($request, $id);
     }
 
     // Delete voo

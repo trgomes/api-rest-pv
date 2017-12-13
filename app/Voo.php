@@ -12,6 +12,12 @@ class Voo extends Model
         'numero', 'data', 'hora', 'aeronave_id', 'origem_id', 'destino_id'
     ];
 
+    protected $guarded = [
+        'timestamps'
+    ];
+
+
+
 
     public function aeronave()
     {
@@ -64,6 +70,7 @@ class Voo extends Model
             ->join('aeroportos as ao', 'v.origem_id', '=', 'ao.id') 
             ->join('aeroportos as ad', 'v.destino_id', '=', 'ad.id')          
             ->select('v.id','v.numero','v.data','v.hora','a.matricula', 'a.tipo', 'ao.nome as origem', 'ad.nome as destino')
+            ->orderBy('v.id','desc')
             ->get();
 
             //Verifica se existe um voo com o ID informado
@@ -84,7 +91,7 @@ class Voo extends Model
             ->join('aeroportos as ao', 'v.origem_id', '=', 'ao.id') 
             ->join('aeroportos as ad', 'v.destino_id', '=', 'ad.id') 
             ->where('v.id', '=', $id)
-            ->select('v.*','a.matricula', 'a.tipo', 'ao.id as origem_id', 'ao.nome as origem', 'ad.id as destino_id','ad.nome as destino')
+            ->select('v.id','v.numero','v.data','v.hora','v.aeronave_id', 'v.origem_id', 'v.destino_id')
             ->get();
 
         //Verifica se existe um voo com o ID informado
@@ -92,37 +99,18 @@ class Voo extends Model
         {
             return response()->json(['response' => 'Não existe voo cadastrado com o ID '.$id], 200);
         }
-            
+
+        $voo = json_encode($voo[0]);
         return $voo;
     }
-
-    //Retorna o voo de acordo como a ID do aeroporto
-    public function getByAirport($id)
-    {
-        $voo = DB::table('voos as v')
-        ->join('aeronaves as a', 'v.aeronave_id', '=', 'a.id')
-        ->join('aeroportos as ao', 'v.origem_id', '=', 'ao.id') 
-        ->join('aeroportos as ad', 'v.destino_id', '=', 'ad.id') 
-        ->where('ao.id', '=', $id)         
-        ->select('v.id','v.numero','v.data','v.hora','a.matricula', 'a.tipo', 'ao.nome as origem', 'ad.nome as destino')            
-        ->get();
-
-        //Verifica se existe um voo com o ID informado
-        if(!$voo)
-        {
-            return response()->json(['response' => 'Não existe voo cadastrado com o ID '.$id], 200);
-        }
-            
-        return $voo;
-    }
-
 
     public function updateVoo($request, $id){
+
         $voo = Voo::find($id);
         
         if(!$voo)
         {
-            return response()->json(['response' => 'Voo não encontrado!'], 400);
+            return response()->json(['response' => 'Voo não encontrado!', 'dados' => $voo], 400);
         }                
               
         $voo->numero = $request->input('numero');
