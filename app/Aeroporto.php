@@ -12,7 +12,6 @@ class Aeroporto extends Model
     ];
 
 
-
     public function vooOrigem(){
         return $this->belongsTo('App\Voo','origem_id');
     }

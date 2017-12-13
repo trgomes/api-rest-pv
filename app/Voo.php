@@ -12,12 +12,6 @@ class Voo extends Model
         'numero', 'data', 'hora', 'aeronave_id', 'origem_id', 'destino_id'
     ];
 
-    protected $guarded = [
-        'timestamps'
-    ];
-
-
-
 
     public function aeronave()
     {

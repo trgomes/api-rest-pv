@@ -24,12 +24,6 @@ class AeroportoController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-
     public function store(Request $request)
     {
         return $this->aeroporto->createAeroporto($request);
@@ -39,12 +33,6 @@ class AeroportoController extends Controller
     public function show($id)
     {
         return $this->aeroporto->getById($id);
-    }
-
-
-    public function edit($id)
-    {
-        //
     }
 
 

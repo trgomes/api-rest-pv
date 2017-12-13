@@ -24,11 +24,6 @@ class VooController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
     //Armazena / Cadastra voo
     public function store(Request $request)
     {
@@ -40,12 +35,6 @@ class VooController extends Controller
     {
         return $this->voo->getById($id);
         
-    }
-
-
-    public function edit($id)
-    {
-        //
     }
 
     // Uopdate voo
