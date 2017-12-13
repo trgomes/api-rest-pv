@@ -24,15 +24,18 @@ class CreateVoosTable extends Migration
             // Foreign Key table aeronaves
             $table->foreign('aeronave_id')
             ->references('id')
-            ->on('aeronaves'); 
+            ->on('aeronaves')
+            ->onDelete('cascade');
             // Foreign Key table aeroportos
             $table->foreign('origem_id')
             ->references('id')
-            ->on('aeroportos');
+            ->on('aeroportos')
+            ->onDelete('cascade');
             // Foreign Key table aeroportos
             $table->foreign('destino_id')
             ->references('id')
-            ->on('aeroportos');
+            ->on('aeroportos')
+            ->onDelete('cascade');
             //Timestamps
             $table->timestamps();
         });

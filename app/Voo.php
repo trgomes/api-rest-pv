@@ -129,9 +129,17 @@ class Voo extends Model
             return response()->json(['response' => 'Não existe voo cadastrado com o ID '.$id], 200);
         }
 
-        $voo->delete();
+        try
+        {
+            $voo->delete();
+            return response()->json(['response' => 'Voo excluido com sucesso'], 200);
+        }
+        catch (\Exception $e)
+        {
+            return response()->json(['response' => 'Erro ao excluir aeroporto', 'erro' => $e->getMessage()], 404);
+        }
 
-        return response()->json(['response' => 'Voo excluido com sucesso'], 200);
+
     }
 
 }

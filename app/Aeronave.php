@@ -92,8 +92,12 @@ class Aeronave extends Model
             return response()->json(['response' => 'Não existe aeronave cadastrada com o ID '.$id], 200);
         }
 
-        $aeronave->delete();
-
-        return response()->json(['response' => 'Aeronave excluida com sucesso'], 200);
+        try{
+            $aeronave->delete();
+            return response()->json(['response' => 'Aeronave excluida com sucesso'], 200);
+        }
+        catch (\Exception $e){
+            return response()->json(['response' => 'Aeronave excluida com sucesso', 'exception' => $e->getMessage()], 200);
+        }
     }
 }
