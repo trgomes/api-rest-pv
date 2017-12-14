@@ -61,9 +61,10 @@ class Voo extends Model
     {
         $voos = DB::table('voos as v')
             ->join('aeronaves as a', 'v.aeronave_id', '=', 'a.id')
+            ->join('tipos as t', 'a.tipo_id', '=', 't.id')
             ->join('aeroportos as ao', 'v.origem_id', '=', 'ao.id') 
             ->join('aeroportos as ad', 'v.destino_id', '=', 'ad.id')          
-            ->select('v.id','v.numero','v.data','v.hora','a.matricula', 'a.tipo', 'ao.nome as origem', 'ad.nome as destino')
+            ->select('v.id','v.numero','v.data','v.hora','a.matricula', 't.tipo', 'ao.nome as origem', 'ad.nome as destino')
             ->orderBy('v.id','desc')
             ->get();
 

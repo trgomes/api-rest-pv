@@ -3,13 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Aeronave extends Model
 {
 
     protected $fillable = [
-        'matricula', 'tipo'
+        'matricula', 'tipo_id'
     ];
+
+
+    public function tipo()
+    {
+        return $this->hasOne('App\Tipo');
+    }
+
 
     public function voo(){
         return $this->belongsTo('App\Voo');
@@ -23,7 +31,7 @@ class Aeronave extends Model
         {
             $aeronave = new Aeronave([
                 'matricula' => $request->input('matricula'),
-                'tipo' => $request->input('tipo')
+                'tipo_id' => $request->input('tipo')
             ]);
 
             $aeronave->save();
@@ -40,7 +48,11 @@ class Aeronave extends Model
     //Retorna todos as Aeronaves cadastradas
     public function getAllAeronaves()
     {
-        $aeronaves = Aeronave::all();        
+        $aeronaves = DB::table('aeronaves as a')
+            ->join('tipos as t', 'a.tipo_id', '=', 't.id')
+            ->select('a.id', 'a.matricula', 'a.tipo_id', 't.tipo')
+            ->orderBy('a.id', 'desc')
+            ->get();
         
         if(!$aeronaves)
         {
@@ -48,19 +60,26 @@ class Aeronave extends Model
         }
             
         return $aeronaves;
+
     }
 
 
     //Retorna apenas o voo especificado pelo ID
     public function getById($id)
     {
-        $aeronave = Aeronave::find($id);
+        $aeronave = DB::table('aeronaves as a')
+            ->join('tipos as t', 'a.tipo_id', '=', 't.id')
+            ->where('a.id', '=', $id)
+            ->select('a.id', 'a.matricula', 'a.tipo_id', 't.tipo')
+            ->orderBy('a.id', 'desc')
+            ->get();
         
         if(!$aeronave)
         {
             return response()->json(['response' => 'Não existe aeronave cadastrada com o ID '.$id], 200);
         }
-            
+
+        $aeronave = json_encode($aeronave[0]);
         return $aeronave;
     }
 
@@ -74,7 +93,7 @@ class Aeronave extends Model
         }                
                 
         $aeronave->matricula = $request->input('matricula');
-        $aeronave->tipo = $request->input('tipo');
+        $aeronave->tipo_id = $request->input('tipo_id');
         
         $aeronave->save();
         return response()->json($aeronave, 200);
