@@ -11,7 +11,7 @@ class Tipo extends Model
     ];
 
 
-    public function aeronave(){
+    public function aeronaves(){
         return $this->belongsTo('App\Aeronave');
     }
 
