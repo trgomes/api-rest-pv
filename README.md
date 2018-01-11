@@ -1,13 +1,13 @@
 **1 - SERVIÇO - REST**
 
-###Pré-requisito
+### Pré-requisito
 - PHP 7 - Definido no path da máquina para execução em linha de comando
 - Mysql 5.4 ou superior
 - Servidor Apache
 
 ***obs.: Se preferir instale toda stack de uma só vez, utilizando o XAMP, WAMP server... De acordo com sua preferência.***
 
-##Instalação da API ou Serviço (como preferir)
+### Instalação da API ou Serviço (como preferir)
 1. Clone o projeto `git clone https://github.com/trgomes/api-rest-pv.git`.
 2. Crie um banco de dados (plano_voo).
 3. Modifique o arquivo `.env` que fica na raiz do projeto com os dados do seu banco (DB_DATABASE=plano_voo, DB_USERNAME= user, DB_PASSWORD=password)
